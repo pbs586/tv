@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>우상호의 토론 컬렉션 · 5.28 선관위 토론 특집</title>
+
+<!-- Open Graph / Telegram preview -->
+<meta property="og:title" content="5.28 선관위 토론 특집, 우상호의 토론 컬렉션" />
+<meta property="og:description" content="우상호 후보의 5.28 선관위 토론 사이다 쇼츠 모음집! 💙 함께 퍼날, 함께 응원!" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://pbs586.github.io/debate-guide-woo/" />
+<meta property="og:image" content="https://pbs586.github.io/debate-guide-woo/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+<style>
+  :root {
+    /* 우아한 황토색 계열의 '가이드' 기본 테마 색상 변수 정의 */
+    --bg: #f3ece0;
+    --bg-deep: #ebe2d2;
+    --paper: #fbf7ef;
+    --ink: #1a1f2c;
+    --ink-soft: #4a4f5c;
+    --ink-mute: #8a8578;
+    --rule: #d9cfb9;
+    --rule-strong: #1a1f2c;
+    --gold: #b8893a;
+    --gold-deep: #8a6420;
+    --blue: #1d3a6e;
+    --blue-deep: #0f1f3d;
+    --red: #b03a2e;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.5;
+  }
+  .serif { font-family: "Noto Serif KR", "Pretendard Variable", serif; font-weight: 700; }
+  .mono { font-family: "DM Mono", ui-monospace, "SF Mono", monospace; }
+
+  /* layout */
+  .page {
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--paper);
+    min-height: 100vh;
+    position: relative;
+    box-shadow: 0 0 0 1px var(--rule), 0 30px 60px -20px rgba(0,0,0,0.12);
+  }
+  @media (min-width: 600px) {
+    body { padding: 24px 0; background: var(--bg-deep); }
+    .page { border-radius: 4px; }
+  }
+  /* 데스크톱 반응형 2열 그리드 정의 */
+  @media (min-width: 768px) {
+    .page { max-width: 900px; }
+    .videos {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .video {
+      border-bottom: none;
+      border-right: 1px dashed var(--rule);
+    }
+    .video:nth-child(2n) { border-right: none; }
+    .video:nth-child(n+3) { border-top: 1px dashed var(--rule); }
+  }
+
+  /* sticky share bar */
+  .sharebar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251, 247, 239, 0.85);
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 16px;
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  }
+  .sharebar .brand { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); flex: 1; }
+  .sharebtn {
+    appearance: none; border: 1px solid var(--rule-strong); background: transparent;
+    color: var(--ink); font-family: inherit; font-size: 12px; font-weight: 600;
+    padding: 7px 14px; border-radius: 999px; cursor: pointer; letter-spacing: 0.02em;
+    display: inline-flex; align-items: center; gap: 5px;
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .sharebtn:hover { background: var(--rule-strong); color: var(--paper); transform: translateY(-1px); }
+  .sharebtn.primary { background: var(--rule-strong); color: var(--paper); }
+  .sharebtn.primary:hover { background: var(--ink-soft); }
+
+  /* hero - 단 하나의 메인 헤더를 표현하기 위한 고급 스타일 */
+  .hero {
+    padding: 40px 24px;
+    border-bottom: 2px solid var(--rule-strong);
+    background: var(--paper);
+    position: relative;
+    text-align: center;
+  }
+  .hero::before {
+    content: ""; position: absolute; left: 24px; right: 24px; top: 18px; height: 1px; background: var(--rule-strong);
+  }
+  .hero::after {
+    content: ""; position: absolute; left: 24px; right: 24px; bottom: 14px; height: 1px; background: var(--rule-strong);
+  }
+  .hero h1 {
+    font-family: "Noto Serif KR", serif; font-weight: 800;
+    font-size: clamp(20px, 5.5vw, 26px); line-height: 1.4;
+    margin: 0; letter-spacing: -0.02em;
+    color: var(--ink);
+    word-break: keep-all;
+  }
+  .hero h1 .accent { color: var(--blue); }
+
+  /* video cards */
+  .videos { display: flex; flex-direction: column; gap: 0; padding: 24px 0 8px; }
+  .video {
+    padding: 16px 24px 32px;
+    border-bottom: 1px dashed var(--rule);
+    margin-bottom: 24px;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
+  }
+  .video:hover {
+    background: rgba(29, 58, 110, 0.04);
+  }
+  .video:last-child { border-bottom: none; margin-bottom: 0; }
+  .video-head {
+    display: flex; align-items: flex-start; gap: 14px;
+    margin-bottom: 12px;
+  }
+  .video-num {
+    flex-shrink: 0;
+    font-family: "Noto Serif KR", serif;
+    font-weight: 900;
+    font-size: clamp(30px, 9vw, 38px);
+    line-height: 0.9;
+    color: var(--blue);
+    font-style: italic;
+    width: clamp(36px, 10vw, 44px);
+  }
+  .video-titlewrap { flex: 1; min-width: 0; }
+  .video-stars {
+    color: var(--blue); font-size: 12px; letter-spacing: 0.15em;
+    margin-bottom: 4px;
+  }
+  .video-title {
+    font-family: "Noto Serif KR", serif; font-weight: 700;
+    font-size: clamp(16px, 4.5vw, 19px); line-height: 1.3; color: var(--ink);
+    margin: 0; letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+  .video-desc {
+    font-size: 13px; line-height: 1.55; color: var(--ink-soft);
+    margin: 8px 0 14px;
+    font-style: italic;
+    border-left: 2px solid var(--rule);
+    padding-left: 10px;
+  }
+
+  .thumb {
+    display: block; position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--ink); color: var(--paper);
+    overflow: hidden;
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .thumb img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 300ms ease;
+  }
+  .thumb:hover img { transform: scale(1.04); }
+  .thumb:hover {
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+    border-color: var(--blue);
+  }
+  .thumb .play {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(4px);
+    display: grid; place-items: center;
+    border: 2px solid rgba(255,255,255,0.9);
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .thumb:hover .play { background: var(--red); transform: translate(-50%,-50%) scale(1.08); }
+  .thumb .play::before {
+    content: ""; display: block;
+    border-left: 16px solid #fff;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    margin-left: 4px;
+  }
+  .thumb .tag {
+    position: absolute; top: 10px; left: 10px;
+    background: var(--paper); color: var(--ink);
+    font-family: "DM Mono", monospace; font-size: 10px; font-weight: 600;
+    padding: 3px 7px; letter-spacing: 0.1em;
+    border: 1px solid var(--rule-strong);
+    border-radius: 4px;
+  }
+  .thumb .duration {
+    position: absolute; bottom: 10px; right: 10px;
+    background: rgba(0,0,0,0.75); color: #fff;
+    font-family: "DM Mono", monospace; font-size: 11px; font-weight: 500;
+    padding: 3px 6px;
+    border-radius: 4px;
+  }
+
+  .video-cta {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 12px;
+    gap: 12px;
+  }
+  .video-cta .watch {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 700; color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 1px;
+  }
+  .video-cta .watch:hover { color: var(--red); border-color: var(--red); }
+  .video-cta .watch .arrow { font-family: "DM Mono", monospace; }
+  .video-cta .share {
+    display: inline-flex; gap: 6px;
+  }
+  .icon-btn {
+    appearance: none; background: transparent; border: 1px solid var(--rule);
+    width: 30px; height: 30px; border-radius: 50%;
+    cursor: pointer; color: var(--ink-soft);
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 600;
+    transition: all 120ms;
+    font-family: inherit;
+    padding: 0;
+  }
+  .icon-btn:hover { border-color: var(--ink); color: var(--ink); background: var(--bg); }
+  .icon-btn.copied { background: var(--blue); color: var(--paper); border-color: var(--blue); }
+
+  /* outro / cta */
+  .outro {
+    padding: 36px 24px 28px;
+    text-align: center;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+  }
+  .outro .stars { color: var(--blue); font-size: 20px; letter-spacing: 0.2em; margin-bottom: 14px; }
+  .outro h2 {
+    font-family: "Noto Serif KR", serif; font-weight: 900;
+    font-size: 22px; line-height: 1.25;
+    margin: 0 0 8px;
+  }
+  .outro p {
+    font-size: 14px; color: var(--ink-soft);
+    margin: 0 0 22px;
+  }
+  .outro .cta-stack { display: flex; flex-direction: column; gap: 10px; max-width: 280px; margin: 0 auto; }
+  .outro .cta {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 18px;
+    font-size: 14px; font-weight: 700;
+    border: 1.5px solid var(--rule-strong);
+    background: var(--rule-strong); color: var(--paper);
+    text-decoration: none; cursor: pointer;
+    font-family: inherit;
+    transition: opacity 120ms, transform 120ms;
+  }
+  .outro .cta:hover { opacity: 0.88; }
+  .outro .cta.secondary { background: transparent; color: var(--ink); }
+  .outro .cta.secondary:hover { background: var(--paper); }
+
+  /* footer */
+  .pagefoot {
+    padding: 22px 24px 32px;
+    text-align: center;
+    background: var(--paper);
+  }
+  .pagefoot .marks { color: var(--blue); font-size: 14px; letter-spacing: 0.3em; }
+  .pagefoot .credit {
+    font-family: "DM Mono", monospace;
+    font-size: 10px; letter-spacing: 0.2em; color: var(--ink-mute);
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+  .pagefoot .heart { color: var(--blue); }
+
+  /* toast */
+  .toast {
+    position: fixed; left: 50%; bottom: 32px; transform: translateX(-50%);
+    background: var(--ink); color: var(--paper);
+    padding: 12px 24px; font-size: 13px; font-weight: 600;
+    border-radius: 999px; z-index: 100;
+    opacity: 0; pointer-events: none;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.08);
+    letter-spacing: -0.01em;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(-8px); }
+
+  /* legend bar */
+  .legend {
+    display: flex; align-items: center; justify-content: center; gap: clamp(4px, 1.5vw, 10px);
+    padding: 10px 12px; background: var(--bg-deep);
+    font-family: "DM Mono", monospace; font-size: clamp(8.5px, 2.2vw, 10px);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+  .legend .star { color: var(--blue); letter-spacing: 0.1em; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="env,react">
+const { useState, useEffect, useMemo } = React;
+
+/* 
+  사용자의 요청에 맞추어 10개의 비디오 리스트를 1차원 평탄화(Flat) 구조로 개편합니다.
+  기존의 방송사 구분 및 날짜 정보(G1, KBS, MBC)와 불필요한 메타 정보는 완전히 제거하고
+  01번부터 10번까지 번호순으로 일렬 나열합니다.
+*/
+const VIDEOS = [
+  { n: 1, title: "나라 거덜날뻔 했는데.. 좀 미안???", desc: "금융시장 마비시킨 김진태발 금융위기, 이제는 왜 사과하냐고?", id: "o20vrOXW9GM", stars: 3 },
+  { n: 2, title: "김진태, 우상호 후보 지지선언??", desc: "토론 도중 나온 뜻밖의 지지(?) 선언, 그 진실은?", id: "tEmMYbcynEI", stars: 3 },
+  { n: 3, title: "서울, 강남부자 김진태(대치동 50억 아파트)", desc: "강원도의 일꾼이라면서, 하나뿐인 집은 대치동 50억 아파트?", id: "pTJB11MzbwY", stars: 3 },
+  { n: 4, title: "레고랜드, 이거 다~~ 거짓말인거 아시죠!!", desc: "손바닥으로 하늘을 가리지~ 아무런 손실이 없었다구요?", id: "Vnx8VoUi-Tg", stars: 3 },
+  { n: 5, title: "청년 말고 나만 행복(feat. 김진태)", desc: "강원 청년들은 떠나는데.. 도지사 혼자만 행복한 강원도?", id: "TR3_XGWYEwE", stars: 3 }
+];
+
+const PAGE_URL = (typeof window !== "undefined" && window.location.href) || "";
+const SHARE_TEXT = "강원도민이 검증한 시간, 우상호의 토론 컬렉션 💙";
+
+function thumbUrl(id) {
+  return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+}
+function shortUrl(id) {
+  return `https://youtube.com/shorts/${id}`;
+}
+
+function Stars({ n = 3 }) {
+  return <span className="video-stars" aria-label={`${n}성`}>{"★".repeat(n)}{"☆".repeat(3-n)}</span>;
+}
+
+function ShareBar({ onShare, onCopy, copied }) {
+  return (
+    <div className="sharebar">
+      <span className="brand">★★★ 토론 맛집 가이드</span>
+      <button className="sharebtn" onClick={onCopy}>{copied ? "복사 완료" : "링크복사"}</button>
+      <button className="sharebtn primary" onClick={onShare}>공유하기</button>
+    </div>
+  );
+}
+
+function Toast({ message, show }) {
+  return <div className={`toast ${show ? "show" : ""}`}>{message}</div>;
+}
+
+function Video({ v, onCopyOne, copiedId }) {
+  const url = shortUrl(v.id);
+  return (
+    <article className="video" id={`v-${v.id}`}>
+      <div className="video-head">
+        <div className="video-num">{String(v.n).padStart(2,"0")}</div>
+        <div className="video-titlewrap">
+          <Stars n={v.stars} />
+          <h3 className="video-title">{v.title}</h3>
+        </div>
+      </div>
+      <p className="video-desc">“{v.desc}”</p>
+      <a className="thumb" href={url} target="_blank" rel="noopener noreferrer" aria-label={`${v.title} 쇼츠 열기`}>
+        <span className="tag">SHORTS</span>
+        <img src={thumbUrl(v.id)} alt="" loading="lazy" onError={(e)=>{
+          if(!e.currentTarget.dataset.fallback){
+            e.currentTarget.dataset.fallback = "1";
+            e.currentTarget.src = `https://i.ytimg.com/vi/${v.id}/mqdefault.jpg`;
+          }
+        }} />
+        <span className="play" aria-hidden="true"></span>
+        <span className="duration">SHORTS</span>
+      </a>
+      <div className="video-cta">
+        <a className="watch" href={url} target="_blank" rel="noopener noreferrer">
+          쇼츠 보러가기 <span className="arrow">→</span>
+        </a>
+        <div className="share">
+          <button className={`icon-btn ${copiedId===v.id?"copied":""}`} title="이 영상 링크 복사"
+            onClick={()=>onCopyOne(v.id, url, `우상호 토론 쇼츠: ${v.title}`)}>
+            {copiedId===v.id ? "✓" : "🔗"}
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function App() {
+  const [toast, setToast] = useState(null);
+  const [copiedId, setCopiedId] = useState(null);
+  const [copiedTop, setCopiedTop] = useState(false);
+
+  const showToastMsg = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 1800);
+  };
+
+  const handleShareTop = async () => {
+    const text = SHARE_TEXT;
+    const url = PAGE_URL || "";
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "우상호의 토론 컬렉션", text, url });
+        return;
+      } catch (e) { /* user cancelled */ }
+    }
+    try {
+      await navigator.clipboard.writeText(`${text}\n${url}`);
+      showToastMsg("링크가 클립보드에 복사되었어요");
+    } catch {
+      showToastMsg("공유 기능을 지원하지 않는 브라우저입니다.");
+    }
+  };
+
+  const handleCopyTop = async () => {
+    try {
+      await navigator.clipboard.writeText(`${SHARE_TEXT}\n${PAGE_URL}`);
+      setCopiedTop(true); showToastMsg("링크가 복사됐어요");
+      setTimeout(()=>setCopiedTop(false), 1500);
+    } catch { showToastMsg("복사 실패"); }
+  };
+
+  const handleCopyOne = async (id, url, title) => {
+    try {
+      await navigator.clipboard.writeText(`${title}\n${url}`);
+      setCopiedId(id); showToastMsg("영상 링크가 복사됐어요");
+      setTimeout(()=>setCopiedId(null), 1500);
+    } catch { showToastMsg("복사 실패"); }
+  };
+
+  return (
+    <div className="page" data-screen-label="01 Guide">
+      <ShareBar onShare={handleShareTop} onCopy={handleCopyTop} copied={copiedTop} />
+
+      <div className="legend">
+        <span>EDITION 04 · 5.28 토론 특집</span><span>·</span>
+        <span><span className="star">★★★</span> 강원도민의 검증</span><span>·</span>
+        <span>{VIDEOS.length.toString().padStart(2,"0")} SHORTS</span>
+      </div>
+
+      {/* 
+        사용자 요청 반영:
+        기존의 모든 불필요한 메타 정보와 kicker 등을 제거하고,
+        지정하신 문구 단 하나만 메인 헤더로 배치합니다.
+      */}
+      <header className="hero">
+        <h1>5.28 선관위 토론 특집,<br/><span className="accent">우상호의 토론 컬렉션</span></h1>
+      </header>
+
+      {/* 10개의 쇼츠 카드를 번호순으로 일렬 나열합니다. */}
+      <div className="videos">
+        {VIDEOS.map(v => (
+          <Video key={v.id} v={v} onCopyOne={handleCopyOne} copiedId={copiedId} />
+        ))}
+      </div>
+
+      <section className="outro">
+        <div className="stars">★ ★ ★</div>
+        <h2>이 글을 본 당신,<br/>이제 전할 차례.</h2>
+        <p>지금 이 페이지를 단톡방으로,<br/>가족·친구·이웃에게 전해주세요.</p>
+        <div className="cta-stack">
+          <button className="cta" onClick={handleShareTop}>💙 페이지 공유하기</button>
+          <button className="cta secondary" onClick={handleCopyTop}>{copiedTop ? "✓ 링크 복사 완료" : "🔗 페이지 링크 복사"}</button>
+        </div>
+      </section>
+
+      <footer className="pagefoot">
+        <div className="marks">★ ★ ★</div>
+        <div className="credit">함께 퍼날 <span className="heart">·</span> 함께 응원 <span className="heart">·</span> 함께 강원</div>
+      </footer>
+
+      <Toast message={toast || ""} show={!!toast} />
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+</script>
+</body>
+</html>
